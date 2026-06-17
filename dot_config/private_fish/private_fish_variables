@@ -1,0 +1,4 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR __fish_initialized:4300
+SETUVAR fish_user_paths:/Users/cimer/\x2ecodeium/windsurf/bin\x1e/Users/cimer/\x2ebun/bin\x1e/Users/cimer/software/flutter/bin\x1e/opt/homebrew/opt/mysql\x2dclient/bin\x1e/Users/cimer/\x2ecargo/bin\x1e/Users/cimer/go/bin\x1e/Users/cimer/\x2elocal/bin
