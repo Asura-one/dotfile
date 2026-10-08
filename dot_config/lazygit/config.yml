@@ -1,0 +1,78 @@
+# ============================================================
+# LazyGit 配置 - Catppuccin Mocha 风格
+# 设计原则：轻量、快速、配色统一
+# ============================================================
+
+# ------------------------------------------------------------
+# GUI 配色
+# ------------------------------------------------------------
+gui:
+  # 窗口边框
+  border: "rounded"
+  # 鼠标滚动
+  scrollbackSize: 5000
+
+  # 主题配色（Catppuccin Mocha）
+  theme:
+    activeBorderColor:
+      - "#cba6f7"
+      - bold
+    inactiveBorderColor:
+      - "#45475a"
+    selectedLineBgColor:
+      - "#313244"
+    selectedRangeBgColor:
+      - "#313244"
+    cherryPickedCommitBgColor:
+      - "#45475a"
+    cherryPickedCommitFgColor:
+      - "#cba6f7"
+    unstagedChangesColor:
+      - "#f38ba8"
+    defaultFgColor:
+      - "#cdd6f4"
+    searchingActiveBorderColor:
+      - "#f9e2af"
+
+  # 文件列表中的 git 状态颜色
+  fileTree:
+    # 已修改
+    modifiedColor: "#f9e2af"
+    # 已添加
+    addedColor: "#a6e3a1"
+    # 已删除
+    deletedColor: "#f38ba8"
+    # 未跟踪
+    untrackedColor: "#89b4fa"
+    # 已合并
+    mergedColor: "#cba6f7"
+    # 目录
+    directoryColor: "#89b4fa"
+
+# ------------------------------------------------------------
+# 编辑行为
+# ------------------------------------------------------------
+# 按 e 打开编辑器时的行为
+edit:
+  # 按 e 打开当前选中文件
+  openSelectedFile: true
+
+# ------------------------------------------------------------
+# 提交编辑器
+# ------------------------------------------------------------
+commitEditing:
+  # 自动打开提交编辑器
+  autoWrapCommitMessage: true
+
+# ------------------------------------------------------------
+# 快捷键（保留默认，只加少量自定义）
+# ------------------------------------------------------------
+keybinding:
+  universal:
+    # 退出
+    quit: "q"
+    # 退出不提示
+    quitAndClearStack: "Q"
+  main:
+    # 退出 lazygit
+    quit: "q"
