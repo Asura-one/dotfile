@@ -58,13 +58,12 @@ end
 set -gx FZF_DEFAULT_OPTS "
   --layout=reverse
   --info=inline
-  --border
+  --border=rounded
   --margin=1
   --padding=1
   --ansi
-  --preview '[[ \$(file --mime {1}) =~ binary ]] \
-      && echo {1} is a binary file \
-      || bat --style=numbers --color=always --theme=TwoDark {1} 2>/dev/null | head -1000'
+  --color='fg:#cdd6f4,fg+:#ffffff,bg:#11111b,bg+:#313244,hl:#f38ba8,hl+:#f38ba8,header:#89b4fa,prompt:#cba6f7,pointer:#cba6f7,marker:#f9e2af,spinner:#f9e2af,border:#45475a'
+  --preview 'if [[ -d {1} ]]; then ls -lh --color=always {1} | head -50; elif [[ \$(file --mime {1}) =~ binary ]]; then echo {1} is a binary file; else bat --style=numbers --color=always --theme=Catppuccin-Mocha {1} 2>/dev/null | head -1000; fi'
   --bind 'enter:become(nvim {1})'
   --bind 'alt-l:become(ls -lh {1})'
   --bind 'alt-o:become(open {1})'
@@ -221,3 +220,11 @@ end
 if command -q mise
     mise activate fish | source
 end
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if test -n "$OTTY_SHELL_INTEGRATION" -a -r "$OTTY_SHELL_INTEGRATION/otty-integration.fish"
+    source "$OTTY_SHELL_INTEGRATION/otty-integration.fish"
+end
+# <<< otty shell integration <<<
