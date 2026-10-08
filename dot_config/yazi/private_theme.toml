@@ -1,0 +1,74 @@
+# ============================================================
+# Yazi 主题配置 - Catppuccin Mocha
+# 文档: https://yazi-rs.github.io/docs/configuration/theme/
+# ============================================================
+
+# 直接使用 Catppuccin Mocha 配色（无需安装 flavor 包）
+# 参考: https://github.com/catppuccin/catppuccin
+
+[mgr]
+# 当前选中文件的样式
+active = { fg = "#cdd6f4", bg = "#313244" }
+# 悬停文件的样式
+hovered = { fg = "#f5e0dc", bg = "#181825" }
+# 选中文件的样式
+selected = { fg = "#cba6f7", bg = "#313244" }
+# 分隔线
+spacer = { bg = "#11111b" }
+
+[filename]
+# 目录图标和文字
+dir = { fg = "#89b4fa" }
+# 符号链接
+link = { fg = "#f5c2e7" }
+# 执行文件
+exec = { fg = "#a6e3a1" }
+
+[preview]
+# 预览区标题
+title = { fg = "#89b4fa" }
+# 预览区边框
+border = { fg = "#45475a" }
+
+[tab]
+# 标签栏
+active = { fg = "#cba6f7", bg = "#313244" }
+hovered = { fg = "#f5e0dc", bg = "#181825" }
+inactive = { fg = "#6c7086", bg = "#11111b" }
+
+[status]
+# 状态栏
+normal = { fg = "#cdd6f4", bg = "#313244" }
+message = { fg = "#f9e2af", bg = "#313244" }
+
+[which]
+# 按键提示
+tab = { fg = "#f5c2e7" }
+
+[help]
+# 帮助界面
+keybind = { fg = "#89b4fa" }
+desc = { fg = "#cdd6f4" }
+
+[icon]
+# 文件类型图标颜色
+mkdir = { fg = "#f9e2af" }
+mime = { fg = "#89dceb" }
+
+# 按扩展名设置图标颜色
+ext = [
+  { name = "rs", fg = "#f9e2af" },
+  { name = "js", fg = "#f9e2af" },
+  { name = "ts", fg = "#89b4fa" },
+  { name = "tsx", fg = "#89b4fa" },
+  { name = "jsx", fg = "#89b4fa" },
+  { name = "py", fg = "#f9e2af" },
+  { name = "md", fg = "#f38ba8" },
+  { name = "toml", fg = "#f9e2af" },
+  { name = "yaml", fg = "#f9e2af" },
+  { name = "yml", fg = "#f9e2af" },
+  { name = "json", fg = "#f9e2af" },
+  { name = "sh", fg = "#a6e3a1" },
+  { name = "zsh", fg = "#a6e3a1" },
+  { name = "fish", fg = "#a6e3a1" },
+]
