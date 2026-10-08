@@ -1,2 +1,75 @@
+# ============================================================
+# Starship 配置 - 轻量快速版
+# 设计原则：模块少、缓存开、不检测耗时命令
+# 配色：Catppuccin Mocha
+# ============================================================
+
+# 禁用命令检测缓存（保持快速）
+command_timeout = 1000
+
+# 格式：
+# 目录 → git分支 → 语言版本 → 提示符
+format = """
+$directory$git_branch$python$nodejs$rust$golang$cmd_duration$line_break$character"""
+
+# ------------------------------------------------------------
+# 目录
+# ------------------------------------------------------------
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold #89b4fa"
+read_only_style = "#f38ba8"
+
+# ------------------------------------------------------------
+# Git 分支（轻量模式：只显示分支名，不显示 status 统计）
+# ------------------------------------------------------------
+[git_branch]
+format = "on [$branch]($style) "
+style = "#cba6f7"
+symbol = ""
+
+# 禁用 git_status（大幅提速）
+[git_status]
+disabled = true
+
+# ------------------------------------------------------------
+# 语言版本（只检测当前目录是否有对应文件）
+# ------------------------------------------------------------
 [python]
 python_binary = "python3"
+format = "via [🐍 $virtualenv]($style) "
+style = "#f9e2af"
+detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", "*.py"]
+
+[nodejs]
+format = "via [🟩 $version]($style) "
+style = "#a6e3a1"
+detect_files = ["package.json", ".nvmrc"]
+
+[rust]
+format = "via [🦀 $version]($style) "
+style = "#fab387"
+detect_files = ["Cargo.toml"]
+
+[golang]
+format = "via [🐹 $version]($style) "
+style = "#89dceb"
+detect_files = ["go.mod", "main.go"]
+
+# ------------------------------------------------------------
+# 命令执行时间（只显示超过 2s 的）
+# ------------------------------------------------------------
+[cmd_duration]
+min_time_to_show = 2000
+format = "took [$duration]($style) "
+style = "#f9e2af"
+
+# ------------------------------------------------------------
+# 提示符
+# ------------------------------------------------------------
+[character]
+success_format = "❯ "
+error_format = "❯ "
+success_style = "bold #a6e3a1"
+error_style = "bold #f38ba8"
