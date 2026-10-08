@@ -3,9 +3,9 @@
 
 file="$1"
 
-# 目录：显示 ls -lh
+# 目录：用 eza 预览（带图标、颜色、git 状态）
 if [ -d "$file" ]; then
-    ls -lh --color=always "$file" 2>/dev/null | head -50
+    eza -lah --color=always --icons=always --git "$file" 2>/dev/null | head -50
     exit 0
 fi
 
