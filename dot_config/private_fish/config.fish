@@ -63,7 +63,7 @@ set -gx FZF_DEFAULT_OPTS "
   --padding=1
   --ansi
   --color='fg:#cdd6f4,fg+:#ffffff,bg:#11111b,bg+:#313244,hl:#f38ba8,hl+:#f38ba8,header:#89b4fa,prompt:#cba6f7,pointer:#cba6f7,marker:#f9e2af,spinner:#f9e2af,border:#45475a'
-  --preview 'if [[ -d {1} ]]; then ls -lh --color=always {1} | head -50; elif [[ \$(file --mime {1}) =~ binary ]]; then echo {1} is a binary file; else bat --style=numbers --color=always --theme=Catppuccin-Mocha {1} 2>/dev/null | head -1000; fi'
+  --preview '~/.config/fzf-preview.sh {1}'
   --bind 'enter:become(nvim {1})'
   --bind 'alt-l:become(ls -lh {1})'
   --bind 'alt-o:become(open {1})'
