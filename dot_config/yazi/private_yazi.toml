@@ -1,0 +1,158 @@
+# ============================================================
+# Yazi 主配置
+# 文档: https://yazi-rs.github.io/docs/configuration/yazi/
+# ============================================================
+
+[mgr]
+# 布局比例: [父目录, 当前目录, 预览]
+ratio = [1, 4, 3]
+
+# 排序
+sort_by = "natural"        # natural | alphabetical | mtime | btime | size | extension
+sort_sensitive = false      # 不区分大小写
+sort_reverse = false       # 正向排序
+sort_dir_first = true      # 目录排在文件前面
+sort_translit = true       # 重音字符归一化（á→a）
+
+# 显示
+show_hidden = false        # 隐藏文件（按 . 切换）
+show_symlink = true
+
+# 滚动
+scrolloff = 5              # 光标上下保留的行数
+
+# 行模式：右侧显示的信息
+# 可选: none | size | btime | mtime | permissions | owner
+# 自定义 size_and_mtime 在 init.lua 中定义
+linemode = "size_and_mtime"
+
+[preview]
+# 预览设置
+wrap = "no"                # 代码不换行
+tab_size = 4               # Tab 宽度
+max_width = 1200            # 图片预览最大宽度
+max_height = 900           # 图片预览最大高度
+cache_dir = ""             # 默认系统缓存目录
+
+# ============================================================
+# 文件打开器
+# ============================================================
+[opener]
+edit = [
+  { run = 'nvim "$@"', block = true, desc = "Neovim" },
+]
+open = [
+  { run = 'open "$@"', orphan = true, desc = "系统默认打开" },
+]
+graphic = [
+  { run = 'open "$@"', orphan = true, desc = "预览图查看器" },
+]
+video = [
+  { run = 'open "$@"', orphan = true, desc = "视频播放器" },
+]
+audio = [
+  { run = 'open "$@"', orphan = true, desc = "音乐播放器" },
+]
+pdf = [
+  { run = 'open "$@"', orphan = true, desc = "PDF 阅读器" },
+]
+folder = [
+  { run = 'open "$@"', orphan = true, desc = "访达打开" },
+]
+
+# 文件类型与打开器映射
+[[open.rules]]
+mime = "text/*"
+use = "edit"
+
+[[open.rules]]
+mime = "application/json"
+use = "edit"
+
+[[open.rules]]
+mime = "application/xml"
+use = "edit"
+
+[[open.rules]]
+mime = "image/*"
+use = "graphic"
+
+[[open.rules]]
+mime = "video/*"
+use = "video"
+
+[[open.rules]]
+mime = "audio/*"
+use = "audio"
+
+[[open.rules]]
+mime = "application/pdf"
+use = "pdf"
+
+[[open.rules]]
+mime = "inode/directory"
+use = "folder"
+
+# 按扩展名匹配（url = glob 模式）
+[[open.rules]]
+url = "*.md"
+use = "edit"
+
+[[open.rules]]
+url = "*.txt"
+use = "edit"
+
+[[open.rules]]
+url = "*.sh"
+use = "edit"
+
+[[open.rules]]
+url = "*.zsh"
+use = "edit"
+
+[[open.rules]]
+url = "*.fish"
+use = "edit"
+
+[[open.rules]]
+url = "*.toml"
+use = "edit"
+
+[[open.rules]]
+url = "*.yaml"
+use = "edit"
+
+[[open.rules]]
+url = "*.yml"
+use = "edit"
+
+# ============================================================
+# 插件配置
+# ============================================================
+[plugin]
+
+# Git 状态获取器（在文件列表显示 git 状态）
+# 注意：需要先安装 git 插件: ya pkg add yazi-rs/plugins:git
+[[plugin.prepend_fetchers]]
+url = "*"
+run = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url = "*/"
+run = "git"
+group = "git"
+
+# Markdown 用 glow 渲染预览
+# 注意：yazi 内置已支持 markdown 预览（用 bat 语法高亮），无需额外配置
+# [[plugin.prepend_previewers]]
+# url = "*.md"
+# run = "glow"
+
+# ============================================================
+# 任务
+# ============================================================
+[tasks]
+# 并发任务数
+micro_workers = 10
+macro_workers = 32
