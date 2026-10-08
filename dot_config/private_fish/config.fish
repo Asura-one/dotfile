@@ -76,6 +76,9 @@ set -gx FZF_DEFAULT_OPTS "
 # ==============================================================================
 # fzf --fish | source  # 取消注释以在启动时动态加载（较慢）
 
+# 加载 fzf key bindings（在 PATH 设置之后加载，确保能找到 fzf）
+source ~/.config/fish/fzf-key-bindings.fish
+
 # ==============================================================================
 # Fisher 插件（替代 zplug）
 # 安装 Fisher: curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
