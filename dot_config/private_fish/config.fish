@@ -65,7 +65,7 @@ set -gx FZF_DEFAULT_OPTS "
   --color='fg:#cdd6f4,fg+:#ffffff,bg:#11111b,bg+:#313244,hl:#f38ba8,hl+:#f38ba8,header:#89b4fa,prompt:#cba6f7,pointer:#cba6f7,marker:#f9e2af,spinner:#f9e2af,border:#45475a'
   --preview '~/.config/fzf-preview.sh {1}'
   --bind 'enter:become(nvim {1})'
-  --bind 'alt-l:become(ls -lh {1})'
+  --bind 'alt-l:become(eza -lh --color=always --icons=always {1})'
   --bind 'alt-o:become(open {1})'
 "
 
@@ -122,6 +122,16 @@ function unproxy
     set -e https_proxy
     set -e all_proxy
     echo (set_color green)"已关闭终端代理"(set_color normal)
+end
+
+# ==============================================================================
+# eza (现代 ls 替代品)
+# ==============================================================================
+if command -q eza
+    alias ls='eza --color=always --icons=always'
+    alias ll='eza -lah --color=always --icons=always --git'
+    alias la='eza -a --color=always --icons=always'
+    alias lt='eza --tree --level=2 --color=always --icons=always'
 end
 
 # ==============================================================================
