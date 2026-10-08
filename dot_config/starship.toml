@@ -61,7 +61,7 @@ detect_files = ["go.mod", "main.go"]
 # 命令执行时间（只显示超过 2s 的）
 # ------------------------------------------------------------
 [cmd_duration]
-min_time_to_show = 2000
+min_time_to_notify = 2000
 format = "took [$duration]($style) "
 style = "#f9e2af"
 
@@ -69,7 +69,5 @@ style = "#f9e2af"
 # 提示符
 # ------------------------------------------------------------
 [character]
-success_format = "❯ "
-error_format = "❯ "
-success_style = "bold #a6e3a1"
-error_style = "bold #f38ba8"
+success_symbol = "[❯](bold #a6e3a1)"
+error_symbol = "[❯](bold #f38ba8)"
