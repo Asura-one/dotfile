@@ -14,8 +14,8 @@ dark_name = "catppuccin"
 light_name = "catppuccin-latte"
 
 [keys]
-# 前缀键改成 ctrl+a（比 ctrl+b 顺手，左手小拇指够得到）
-prefix = "ctrl+a"
+# 前缀键：ctrl+b（tmux 习惯）
+prefix = "ctrl+b"
 
 # 常用 pane 操作
 zoom = "prefix+z"
@@ -38,4 +38,3 @@ rename_workspace = "prefix+shift+w"
 
 # 复制模式
 copy_mode = "prefix+["
-paste = "prefix+]"
