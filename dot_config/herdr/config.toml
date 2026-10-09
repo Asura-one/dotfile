@@ -9,9 +9,7 @@ switch_ascii_input_source_in_prefix = true
 
 [theme]
 name = "catppuccin"
-auto_switch = true
-dark_name = "catppuccin"
-light_name = "catppuccin-latte"
+auto_switch = false
 
 [keys]
 # 前缀键：ctrl+b（tmux 习惯）
