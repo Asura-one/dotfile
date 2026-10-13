@@ -1,13 +1,14 @@
 # ============================================================
-# Starship 配置 - Catppuccin Mocha
+# Starship 配置 - Catppuccin Mocha 配色（非分块风格）
+# 内容模块：目录 / git分支+状态 / 语言版本 / Docker / 时间
 # ============================================================
 
 command_timeout = 1000
 
 # 格式顺序：
-# 目录 → git分支+状态 → 包版本 → 语言版本 → 执行时间 → 提示符
+# 目录 → git分支+状态 → 语言版本 → Docker → 时间 → 提示符
 format = """
-$directory$git_branch$git_status$package$python$nodejs$rust$golang$cmd_duration$line_break$character"""
+$directory$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$time$line_break$character"""
 
 # ------------------------------------------------------------
 # 目录
@@ -22,9 +23,9 @@ read_only_style = "#f38ba8"
 # Git 分支
 # ------------------------------------------------------------
 [git_branch]
+symbol = " "
 format = "on [$symbol$branch]($style) "
 style = "#cba6f7"
-symbol = ""
 
 # ------------------------------------------------------------
 # Git 状态（精简模式：只显示符号，不显示详细数字）
@@ -44,38 +45,73 @@ renamed = "→"
 deleted = "x"
 
 # ------------------------------------------------------------
-# 包版本（npm/cargo/pnpm 等）
+# 语言版本（有对应文件才显示）
 # ------------------------------------------------------------
-[package]
-format = "is [📦 $version]($style) "
-style = "#fab387"
-
-# ------------------------------------------------------------
-# 语言版本
-# ------------------------------------------------------------
-[python]
-python_binary = "python3"
-format = "via [🐍 $virtualenv$version]($style) "
-style = "#f9e2af"
-detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", "*.py"]
-
-[nodejs]
-format = "via [⚡ $version]($style) "
-style = "#a6e3a1"
-detect_files = ["package.json", ".nvmrc"]
+[c]
+symbol = " "
+format = "via [$symbol$version]($style) "
+style = "#89dceb"
 
 [rust]
-format = "via [🦀 $version]($style) "
+symbol = " "
+format = "via [$symbol$version]($style) "
 style = "#fab387"
-detect_files = ["Cargo.toml"]
 
 [golang]
-format = "via [🐹 $version]($style) "
+symbol = " "
+format = "via [$symbol$version]($style) "
+style = "#89b4fa"
+
+[nodejs]
+symbol = " "
+format = "via [$symbol$version]($style) "
+style = "#a6e3a1"
+
+[php]
+symbol = " "
+format = "via [$symbol$version]($style) "
 style = "#89dceb"
-detect_files = ["go.mod", "main.go"]
+
+[java]
+symbol = " "
+format = "via [$symbol$version]($style) "
+style = "#f9e2af"
+
+[kotlin]
+symbol = " "
+format = "via [$symbol$version]($style) "
+style = "#cba6f7"
+
+[haskell]
+symbol = " "
+format = "via [$symbol$version]($style) "
+style = "#cba6f7"
+
+[python]
+python_binary = "python3"
+symbol = " "
+format = "via [$symbol$virtualenv$version]($style) "
+style = "#f9e2af"
 
 # ------------------------------------------------------------
-# 命令执行时间
+# Docker context
+# ------------------------------------------------------------
+[docker_context]
+symbol = " "
+format = "on [$symbol$context]($style) "
+style = "#89b4fa"
+
+# ------------------------------------------------------------
+# 时间
+# ------------------------------------------------------------
+[time]
+disabled = false
+time_format = "%R"
+format = "at [$time]($style) "
+style = "#6c7086"
+
+# ------------------------------------------------------------
+# 命令执行时间（超时才显示）
 # ------------------------------------------------------------
 [cmd_duration]
 min_time_to_notify = 2000
@@ -86,5 +122,10 @@ style = "#f9e2af"
 # 提示符
 # ------------------------------------------------------------
 [character]
-success_symbol = "[❯](bold #a6e3a1)"
-error_symbol = "[❯](bold #f38ba8)"
+disabled = false
+success_symbol = "[](bold #a6e3a1)"
+error_symbol = "[](bold #f38ba8)"
+vimcmd_symbol = "[](bold #a6e3a1)"
+vimcmd_replace_one_symbol = "[](bold #cba6f7)"
+vimcmd_replace_symbol = "[](bold #cba6f7)"
+vimcmd_visual_symbol = "[](bold #f9e2af)"
