@@ -6,9 +6,9 @@
 command_timeout = 1000
 
 # 格式顺序：
-# 目录 → git分支+状态 → 语言版本 → Docker → 运行时间 → 时间 → 提示符
+# 目录 → git分支+状态 → 包版本 → 语言版本 → Docker → 运行时间 → 时间 → 提示符
 format = """
-$directory$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$cmd_duration$time$line_break$character"""
+$directory$git_branch$git_status$package$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$cmd_duration$time$line_break$character"""
 
 # ------------------------------------------------------------
 # 目录
@@ -43,6 +43,14 @@ modified = "*"
 staged = "+"
 renamed = "→"
 deleted = "x"
+
+# ------------------------------------------------------------
+# 包版本（npm/cargo/pnpm 等，有 package 文件才显示）
+# ------------------------------------------------------------
+[package]
+symbol = "📦 "
+format = "is [$symbol$version]($style) "
+style = "#fab387"
 
 # ------------------------------------------------------------
 # 语言版本（有对应文件才显示）
