@@ -6,9 +6,9 @@
 command_timeout = 1000
 
 # 格式顺序：
-# 目录 → git分支+状态 → 语言版本 → Docker → 时间 → 提示符
+# 目录 → git分支+状态 → 语言版本 → Docker → 运行时间 → 时间 → 提示符
 format = """
-$directory$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$time$line_break$character"""
+$directory$git_branch$git_status$c$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$cmd_duration$time$line_break$character"""
 
 # ------------------------------------------------------------
 # 目录
