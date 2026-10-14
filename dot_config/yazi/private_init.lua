@@ -46,11 +46,5 @@ function Linemode:size_and_mtime()
 end
 
 -- ------------------------------------------------------------
--- 自定义 Header: 显示用户名（不含设备名/主机名）
+-- 自定义 Header（已移除：不显示用户名/设备名，恢复 yazi 默认时间显示）
 -- ------------------------------------------------------------
-Header:children_add(function()
-	if ya.target_family() ~= "unix" then
-		return ""
-	end
-	return ui.Span(ya.user_name() .. ":"):fg("blue")
-end, 500, Header.LEFT)
