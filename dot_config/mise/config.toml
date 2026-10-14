@@ -1,2 +1,8 @@
+[settings]
+# 性能：加密缓存计算出的环境（env/PATH），加速嵌套 mise 调用
+env_cache = true
+# 关闭不必要的提示信息，减少干扰
+disable_hints = ["mise"]
+
 [tools]
 node = "26.2.0"
