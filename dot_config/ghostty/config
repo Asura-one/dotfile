@@ -1,0 +1,29 @@
+# From https://ghostty.zerebos.com/ to export
+
+clipboard-read = allow
+clipboard-write = allow
+
+# Theme Config
+theme = Catppuccin Mocha
+
+# Font Config
+# 设置字体大小和特性
+font-feature = ss20
+font-feature = -calt
+font-size = 18
+font-thicken = true
+
+# 设置主字体和备用字体
+font-family = "FiraCode Nerd Font Mono"
+font-family = "LXGW WenKai Screen"
+
+# 为特定样式设置字体
+font-family-bold = "FiraCode Nerd Font Mono"
+font-family-italic = "Victor Mono"
+font-family-bold-italic = "Victor Mono"
+
+# 控制字体样式的合成
+font-synthetic-style = true
+
+# custom-shader = ~/.config/ghostty/glow.glsl
+
