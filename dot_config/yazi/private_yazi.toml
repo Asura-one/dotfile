@@ -36,28 +36,29 @@ cache_dir = ""             # 默认系统缓存目录
 
 # ============================================================
 # 文件打开器
+# 注意：yazi 用 %s 表示所有选中文件路径（自动加引号），%s1 表示第 1 个文件
 # ============================================================
 [opener]
 edit = [
-  { run = 'nvim "$@"', block = true, desc = "Neovim" },
+  { run = 'nvim %s', block = true, desc = "Neovim" },
 ]
 open = [
-  { run = 'open "$@"', orphan = true, desc = "系统默认打开" },
+  { run = 'open %s', orphan = true, desc = "系统默认打开" },
 ]
 graphic = [
-  { run = 'open "$@"', orphan = true, desc = "预览图查看器" },
+  { run = 'open %s', orphan = true, desc = "预览图查看器" },
 ]
 video = [
-  { run = 'open "$@"', orphan = true, desc = "视频播放器" },
+  { run = 'open %s', orphan = true, desc = "视频播放器" },
 ]
 audio = [
-  { run = 'open "$@"', orphan = true, desc = "音乐播放器" },
+  { run = 'open %s', orphan = true, desc = "音乐播放器" },
 ]
 pdf = [
-  { run = 'open "$@"', orphan = true, desc = "PDF 阅读器" },
+  { run = 'open %s', orphan = true, desc = "PDF 阅读器" },
 ]
 folder = [
-  { run = 'open "$@"', orphan = true, desc = "访达打开" },
+  { run = 'open %s', orphan = true, desc = "访达打开" },
 ]
 
 # 文件类型与打开器映射
