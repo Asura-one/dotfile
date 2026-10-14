@@ -1,0 +1,19 @@
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"
+
+# --- chsrc BLOCK BEGIN for Homebrew ---
+export HOMEBREW_API_DOMAIN="https://mirrors.sustech.edu.cn/homebrew-bottles/api"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.sustech.edu.cn/homebrew-bottles"
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.sustech.edu.cn/git/homebrew/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.sustech.edu.cn/git/homebrew/homebrew-core.git"
+# --- chsrc BLOCK ENDIN for Homebrew ---
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integration.bash" ]; then
+  . "$OTTY_SHELL_INTEGRATION/otty-integration.bash"
+fi
+# <<< otty shell integration <<<
