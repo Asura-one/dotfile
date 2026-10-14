@@ -1,0 +1,225 @@
+# ==============================================================================
+# 基础 Zsh 选项
+# ==============================================================================
+typeset -U PATH path
+
+setopt combiningchars
+setopt nonomatch
+setopt promptsubst
+unsetopt notify
+
+# ==============================================================================
+# 环境变量
+# ==============================================================================
+export EDITOR=nvim
+
+# Go
+export GOPATH="$HOME/go"
+export GOROOT="/opt/homebrew/opt/go/libexec"
+export GO111MODULE="on"
+export GOPROXY="https://goproxy.cn"
+
+# Perl
+export PERL5LIB="$HOME/perl5/lib/perl5"
+export PERL_LOCAL_LIB_ROOT="$HOME/perl5"
+export PERL_MB_OPT='--install_base "$HOME/perl5"'
+export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+
+# ==============================================================================
+# PATH 统一管理
+# ==============================================================================
+path=(
+  $HOME/.local/bin
+  $GOPATH/bin
+  $HOME/.cargo/bin
+  /opt/homebrew/opt/mysql-client/bin
+  $BUN_INSTALL/bin
+  /Users/cimer/.codeium/windsurf/bin
+  $path
+)
+
+# ==============================================================================
+# Homebrew
+# ==============================================================================
+if [ -x "/opt/homebrew/bin/brew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ==============================================================================
+# fzf 配置
+# ==============================================================================
+if command -v rg >/dev/null; then
+  export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
+fi
+
+export FZF_DEFAULT_OPTS="
+  --layout=reverse
+  --info=inline
+  --border
+  --margin=1
+  --padding=1
+  --ansi
+  --preview '[[ \$(file --mime {1}) =~ binary ]] \
+      && echo {1} is a binary file \
+      || bat --style=numbers --color=always --theme=TwoDark {1} 2>/dev/null | head -1000'
+  --bind 'enter:become(nvim {1})'
+  --bind 'alt-l:become(ls -lh {1})'
+  --bind 'alt-o:become(open {1})'
+"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ==============================================================================
+# 自动补全
+# ==============================================================================
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+# ==============================================================================
+# History
+# ==============================================================================
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+setopt histignoredups histignorespace sharehistory
+
+# ==============================================================================
+# 代理函数
+# ==============================================================================
+proxy() {
+  local http="http://127.0.0.1:12808"
+  local socks5="socks5://127.0.0.1:12809"
+  export http_proxy=$http
+  export https_proxy=$http
+  export all_proxy=$socks5
+  echo "\033[32m已开启终端代理\033[0m"
+}
+
+unproxy() {
+  unset http_proxy https_proxy all_proxy
+  echo "\033[32m已关闭终端代理\033[0m"
+}
+
+# ==============================================================================
+# fzf 实用函数
+# ==============================================================================
+fcd() {
+  local dir
+  dir=$(fd -t d . / | fzf) || return
+  cd "$dir"
+}
+
+fh() {
+  local cmd
+  cmd=$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//') || return
+  print -z -- "$cmd"
+}
+
+fsearch() {
+  fzf --ansi --delimiter : \
+    --layout=reverse \
+    --info=inline \
+    --border --margin=1 --padding=1 \
+    --preview 'bat --style=numbers --color=always --theme=TwoDark --highlight-line {2} {1} 2>/dev/null | head -1000' \
+    --bind "change:reload:
+      if [[ {q} ]]; then
+        rg --column --line-number --no-heading --color=always --smart-case {q} || true
+      else
+        rg --files --hidden --glob '!.git/*'
+      fi" \
+    --bind "enter:become(nvim {1} +{2})" \
+    < <(rg --files --hidden --glob '!.git/*')
+}
+
+clear_brew_cache() {
+  rm -f ~/.zcompcache/brew_*
+  echo "Homebrew 补全缓存已清理"
+}
+
+# ==============================================================================
+# Obsidian fzf
+# ==============================================================================
+obsidian_fzf() {
+  local VAULT="GroceryStore"
+  local VAULT_PATH="$HOME/开源项目/瞎鸡儿搞/$VAULT"
+
+  local FILE
+  FILE=$(find "$VAULT_PATH" -name "*.md" -type f | \
+    sed "s|$VAULT_PATH/||" | \
+    fzf --preview "bat --color=always --style=plain '$VAULT_PATH/{}'" \
+        --preview-window=right:60% \
+        --height 80%) || return
+
+  obsidian "obsidian://open?vault=$VAULT&file=${FILE%.md}"
+}
+
+alias of='obsidian_fzf'
+
+# ==============================================================================
+# Rust
+# ==============================================================================
+source "$HOME/.cargo/env"
+
+# ==============================================================================
+# bun completions
+# ==============================================================================
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# ==============================================================================
+# zoxide
+# ==============================================================================
+eval "$(zoxide init zsh)"
+
+# ==============================================================================
+# starship
+# ==============================================================================
+eval "$(starship init zsh)"
+
+# 修复 mise command_not_found_handler bug
+# command_not_found_handler() {
+#   local cmd="$1"
+#   [[ -z "$cmd" ]] && return 127
+# 
+#   if [[ "$cmd" != "mise" && "$cmd" != "mise-"* ]] \
+#      && /opt/homebrew/bin/mise hook-not-found -s zsh -- "$cmd"
+#   then
+#     _mise_hook
+#     "$@"
+#   elif [ -n "$(declare -f _command_not_found_handler)" ]; then
+#     _command_not_found_handler "$@"
+#   else
+#     echo "zsh: command not found: $cmd" >&2
+#     return 127
+#   fi
+# }
+
+# ==============================================================================
+# kiro integration
+# ==============================================================================
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# ==============================================================================
+# mise (必须最后)
+# ==============================================================================
+eval "$(mise activate zsh)"
+# oMLX: CLI shim path begin
+case ":$PATH:" in
+  *":$HOME/.omlx/bin:"*) ;;
+  *) export PATH="$HOME/.omlx/bin:$PATH" ;;
+esac
+# oMLX: CLI shim path end
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integration.zsh" ]; then
+  . "$OTTY_SHELL_INTEGRATION/otty-integration.zsh"
+fi
+# <<< otty shell integration <<<

@@ -1,0 +1,4 @@
+. "$HOME/.cargo/env"
+
+# Added by SkillHub CLI installer
+export PATH="/Users/cimer/.local/bin:$PATH"
