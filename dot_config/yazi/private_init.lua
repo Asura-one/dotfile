@@ -46,11 +46,11 @@ function Linemode:size_and_mtime()
 end
 
 -- ------------------------------------------------------------
--- 自定义 Header: 显示用户名@主机名
+-- 自定义 Header: 显示用户名（不含设备名/主机名）
 -- ------------------------------------------------------------
 Header:children_add(function()
 	if ya.target_family() ~= "unix" then
 		return ""
 	end
-	return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ":"):fg("blue")
+	return ui.Span(ya.user_name() .. ":"):fg("blue")
 end, 500, Header.LEFT)
