@@ -1,12 +1,18 @@
-# From https://ghostty.zerebos.com/ to export
+# ============================================================
+# Ghostty 配置 - Catppuccin Mocha
+# 基于官方性能文档 + 社区最佳实践优化（macOS / 1.3.1）
+# ============================================================
 
+# ---- 剪贴板 ----
 clipboard-read = allow
 clipboard-write = allow
+clipboard-paste-protection = true   # 危险粘贴保护（换行命令/控制字符警告）
+copy-on-select = clipboard          # 鼠标选中即复制到剪贴板
 
-# Theme Config
+# ---- 主题 ----
 theme = Catppuccin Mocha
 
-# Font Config
+# ---- 字体 ----
 # 设置字体大小和特性
 font-feature = ss20
 font-feature = -calt
@@ -25,5 +31,40 @@ font-family-bold-italic = "Victor Mono"
 # 控制字体样式的合成
 font-synthetic-style = true
 
-# custom-shader = ~/.config/ghostty/glow.glsl
+# ---- 窗口 ----
+window-padding-x = 12               # 左右内边距
+window-padding-y = 8                # 上下内边距
+window-padding-balance = true       # 窗口尺寸不匹配网格时居中
 
+# ---- 回滚缓冲（历史行数，约几十MB内存，按需调整）----
+scrollback-limit = 100000
+
+# ---- Shell 集成：prompt 跳转 / sudo 感知 / 动态标题 ----
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# ---- 快捷键 ----
+# 分屏
+keybind = ctrl+shift+enter=new_split:right
+keybind = ctrl+shift+d=new_split:down
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+z=toggle_split_zoom
+
+# 标签
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+
+# 字体大小
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
+
+# prompt 跳转（需 shell 集成）
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
+
+# custom-shader = ~/.config/ghostty/glow.glsl
