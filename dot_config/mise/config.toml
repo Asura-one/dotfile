@@ -5,4 +5,6 @@ env_cache = true
 disable_hints = ["mise"]
 
 [tools]
+# go 暂由系统 brew 管理（go.dev 网络受限，待网络恢复可 mise use -g go@1.27.2 纳入）
 node = "26.2.0"
+python = "3.13.3"
