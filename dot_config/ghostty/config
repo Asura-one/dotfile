@@ -6,8 +6,10 @@
 # ---- 剪贴板 ----
 clipboard-read = allow
 clipboard-write = allow
-clipboard-paste-protection = true   # 危险粘贴保护（换行命令/控制字符警告）
-copy-on-select = clipboard          # 鼠标选中即复制到剪贴板
+# 危险粘贴保护（换行命令/控制字符警告）
+clipboard-paste-protection = true
+# 鼠标选中即复制到剪贴板
+copy-on-select = clipboard
 
 # ---- 主题 ----
 theme = Catppuccin Mocha
@@ -32,9 +34,12 @@ font-family-bold-italic = "Victor Mono"
 font-synthetic-style = true
 
 # ---- 窗口 ----
-window-padding-x = 12               # 左右内边距
-window-padding-y = 8                # 上下内边距
-window-padding-balance = true       # 窗口尺寸不匹配网格时居中
+# 左右内边距
+window-padding-x = 12
+# 上下内边距
+window-padding-y = 8
+# 窗口尺寸不匹配网格时居中
+window-padding-balance = true
 
 # ---- 回滚缓冲（历史行数，约几十MB内存，按需调整）----
 scrollback-limit = 100000
