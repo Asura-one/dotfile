@@ -57,11 +57,27 @@ audio = [
 pdf = [
   { run = 'open %s', orphan = true, desc = "PDF 阅读器" },
 ]
+browser = [
+  { run = 'open -a "Brave Browser" %s', orphan = true, desc = "本地浏览器打开" },
+]
 folder = [
   { run = 'open %s', orphan = true, desc = "访达打开" },
 ]
 
 # 文件类型与打开器映射
+# 注意：规则按顺序匹配第一个命中，浏览器规则必须放在 text/* 之前
+[[open.rules]]
+mime = "text/html"
+use = "browser"
+
+[[open.rules]]
+url = "*.html"
+use = "browser"
+
+[[open.rules]]
+url = "*.htm"
+use = "browser"
+
 [[open.rules]]
 mime = "text/*"
 use = "edit"
